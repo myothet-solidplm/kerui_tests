@@ -1,0 +1,268 @@
+﻿<AML>
+ <Item type="Method" id="CC7F41FC37E943A38CC366CA18B26D19" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[            /* *****************************************************************************
+            Method Name:			ProgrammaticVoting
+            Created By/Company:		MyoThet 
+            Creation Date:			2019-03-12
+            Description:
+                Programmatic Voting
+
+            Inputs:
+                userName
+                password
+                votePath
+                itemID
+                itemType
+
+            Revisions:
+                Rev Date		Modified By			Description
+                YYYY-MM-DD		***					Initial creation
+            ***************************************************************************** */
+
+            //WARNING: DO NOT FORGET TO DISABLE THIS IN A PRODUCTION ENVIRONMENT!!!
+            // if (System.Diagnostics.Debugger.Launch()) System.Diagnostics.Debugger.Break();
+
+            string MethodName = "ProgrammaticVoting";
+
+            //***** GRANT IDENTITY PRIVILEGES
+            // grantIdentityPrivileges("Super User"); // If this is enabled always revoke the privileges in the Finally below.
+            //*******************************
+            Innovator myInnovator = this.getInnovator();
+            Item result = this; // default return value.
+
+            string userName = this.getProperty("userName", "");
+            string password = this.getProperty("password", "");
+            string votePath = this.getProperty("votePath", "");
+            string itemID = this.getProperty("itemID", "");
+            string itemType = this.getProperty("itemType", "");
+            string item_number = myInnovator.getItemById(itemType, itemID).getProperty("item_number");
+
+            try
+            {
+                const string READY_FOR_REVIEW = "Ready for Review";
+                const string READY_FOR_SECOND_REVIEW = "Ready for Second Review";
+                const string RELEASE = "Release";
+
+                // retrieve the "Active" workflow activity:
+                Item wfcItem = myInnovator.newItem(itemType, "get"); // work flow controlled Item wfcItem
+                wfcItem.setID(itemID);
+                Item workflow = myInnovator.newItem("Workflow", "get");
+                Item workflowProcess = myInnovator.newItem("Workflow Process", "get");
+                Item wfpa = myInnovator.newItem("Workflow Process Activity", "get");
+                Item activity = myInnovator.newItem("Activity", "get");
+                activity.setProperty("state", "Active");
+                Item activityAssign = myInnovator.newItem("Activity Assignment", "get");
+                Item wpp = myInnovator.newItem("Workflow Process Path", "get");
+                wpp.setProperty("name", votePath);
+                activity.addRelationship(activityAssign);
+                activity.addRelationship(wpp);
+                wfpa.setRelatedItem(activity);
+                workflowProcess.addRelationship(wfpa);
+                workflow.setRelatedItem(workflowProcess);
+                wfcItem.addRelationship(workflow);
+                wfcItem = wfcItem.apply();
+
+                Item wfPaths = wfcItem.getItemsByXPath("//Item[@type='Workflow Process Path']");
+                string submitPathId = "";
+                submitPathId = wfPaths.getItemByIndex(0).getID();
+                Item act = wfcItem.getItemsByXPath("//Item[@type='Workflow Process Activity']/related_id/Item[@type='Activity']");
+
+                string actId = act.getID();
+                string vote = votePath;
+                string comment = "";
+                string assignId = "";
+                Item actAss = wfcItem.getItemsByXPath("//Item[@type='Activity Assignment']");
+
+                switch (votePath)
+                {
+                    case READY_FOR_REVIEW:
+                        for (int i = 0; i < actAss.getItemCount(); i++)
+                        {
+                            Item activityAssignment = actAss.getItemByIndex(i);
+                            string assignedIdentity = activityAssignment.getProperty("related_id", "");
+
+                            Item userItem = myInnovator.newItem("User", "get");
+                            userItem.setProperty("login_name", userName);
+                            userItem = userItem.apply();
+                            string userId = userItem.getID();
+
+                            Item alias = myInnovator.newItem("Alias", "get");
+                            alias.setProperty("source_id", userId);
+                            alias = alias.apply();
+                            string loginIdentity = alias.getProperty("related_id", "");
+
+                            if (assignedIdentity == loginIdentity)
+                            {
+                                assignId = activityAssignment.getID();
+                            }
+                        }
+                        break;
+
+                    case READY_FOR_SECOND_REVIEW:
+                    case RELEASE:
+                        assignId = actAss.getItemByIndex(0).getID();
+                        Item reviewCheck = myInnovator.newItem(itemType, "edit");
+                        reviewCheck.setProperty("workflow_check", "1");
+                        reviewCheck.setAttribute("where", "[" + itemType + "].item_number ='" + item_number + "'");
+                        reviewCheck = reviewCheck.apply();
+
+                        for (int i = 0; i < actAss.getItemCount(); i++)
+                        {
+                            Item activityAssignment = actAss.getItemByIndex(i);
+                            string assignedIdentity = activityAssignment.getProperty("related_id", "");
+
+                            string K_SEngineer = "649023A37550443F8987B84C92C7D74F";
+                            if (assignedIdentity == K_SEngineer)
+                            {
+                                assignId = activityAssignment.getID();
+                            }
+                        }
+
+                        break;
+
+                    default:
+                        break;
+                }
+
+                //Get Task ID to completed 
+                Item taskItem = myInnovator.newItem("Activity Task", "get");
+                taskItem.setProperty("source_id", actId);
+                taskItem = taskItem.apply();
+
+                StringBuilder tasksXml = new StringBuilder();
+                tasksXml.Append(" <Tasks>");
+                for (int t = 0; t < taskItem.getItemCount(); t++)
+                {
+                    Item individualTask = taskItem.getItemByIndex(t);
+                    tasksXml.Append("<Task id=\"" + individualTask.getID() + "\" completed='1'></Task>");
+
+                }
+                tasksXml.Append(" </Tasks>");
+
+                // Build the voting request
+                StringBuilder voteXml = new StringBuilder("");
+                voteXml.Append("<Item type=\"Activity\" action=\"EvaluateActivity\">");
+                voteXml.Append(" <Activity>{0}</Activity>");
+                voteXml.Append(" <ActivityAssignment>{1}</ActivityAssignment>");
+                voteXml.Append(" <Paths>");
+                voteXml.Append(" <Path id=\"{2}\">{3}</Path>");
+                voteXml.Append(" </Paths>");
+                voteXml.Append(" <DelegateTo>0</DelegateTo>");
+                voteXml.Append(tasksXml.ToString());
+                voteXml.Append(" <Variables />");
+                voteXml.Append(" <Authentication mode=\"\" />");
+                voteXml.Append(" <Comments>{4}</Comments>");
+                voteXml.Append(" <Complete>1</Complete>");
+                voteXml.Append("</Item>");
+                // Submit the vote
+
+                string voteString = voteXml.ToString();
+                string AMLString = String.Format(voteString, actId, assignId, submitPathId, vote, comment);
+
+                Item res = myInnovator.newItem();
+                res.loadAML(AMLString);
+                res = res.apply();
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception(string.Format("SYSTEM EXCEPTION in method {0}<br>{1}", MethodName, ex.Message));
+                ////result.setErrorCode("0");		//only use if this method is called from another method
+            }
+            finally
+            {
+                //**** REVOKE IDENTITY PRIVILEGES
+                // revokeIdentityPrivileges();
+                //*******************************
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get IdentityList from IdentityGroup 
+        /// Still need to improve to get recursive 
+        /// </summary>
+        /// <param name="myInnovator"></param>
+        /// <param name="paramIdentityId"></param>
+        /// <returns></returns>
+        public static ArrayList GetAliasIdeneityList(Innovator myInnovator, string paramIdentityId)
+        {
+            ArrayList list = new ArrayList();
+
+            try
+            {
+                // Check for Alias Identity first
+                Item iden = myInnovator.newItem("Identity", "get");
+                iden.setID(paramIdentityId);
+                iden = iden.apply();
+                if (iden.isError() == false && iden.getItemCount() > 0)
+                {
+                    list.Add(paramIdentityId);
+                }
+
+                // For Non Alais Identity
+                Item members = myInnovator.newItem("Member", "get");
+                members.setProperty("source_id", paramIdentityId);
+                members.setPropertyCondition("source_id", "eq");
+                members = members.apply();
+
+                int memberCount = members.getItemCount();
+                for (int i = 0; i < memberCount; i++)
+                {
+                    list.Add(members.getItemByIndex(i).getProperty("related_id", ""));
+                }
+            }
+            catch (Exception ee)
+            {
+                throw new Exception("Exception at GetAliasIdeneityList method " + ee.Message);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// This section is to allow the current method to assume the privileges of a specific identity.
+        /// For instance calling: grantIdentityPrivileges("Aras PLM"); will allow this method all of the
+        /// rights of the Aras PLM identity.
+        /// The revokeIdentityPrivileges() method will removed the privileges added for this method. It
+        /// must be called from before the method exits. Most likely in the Finally of the main method code.
+        /// If different identity privileges must be granted a second time within the same method, first use
+        /// revokeIdentityPrivileges() to remove the first privileges before granting new ones.
+        /// </summary>
+
+        private string AssignedIdentity;
+
+        /// <summary>
+        /// If required, call this helper function to run this method as another Identity. 
+        /// Ensure that you call the revokeIdentityPrivileges helper function in the 
+        /// finally block to revoke the Identity privilege when this method completes.
+        /// </summary>
+        public void grantIdentityPrivileges(string assignedIdent)
+        {
+            if (!string.IsNullOrEmpty(AssignedIdentity))
+            {
+                revokeIdentityPrivileges();
+            }
+
+            Aras.Server.Security.Identity secIdentity = Aras.Server.Security.Identity.GetByName(assignedIdent);
+            if (Aras.Server.Security.Permissions.GrantIdentity(secIdentity))
+            {
+                AssignedIdentity = assignedIdent;
+            }
+        }
+
+        /// <summary>
+        /// If you granted security privileges, then you need to ensure that you revoke the privilege.
+        /// </summary>
+        public void revokeIdentityPrivileges()
+        {
+            if (AssignedIdentity != null)
+            {
+                Aras.Server.Security.Permissions.RevokeIdentity(Aras.Server.Security.Identity.GetByName(AssignedIdentity));
+                AssignedIdentity = null;
+            }]]></method_code>
+  <method_type>C#</method_type>
+  <name>ProgrammaticVoting</name>
+ </Item>
+</AML>

@@ -1,0 +1,19 @@
+﻿<AML>
+ <Item type="TestCase" id="A8A3684173A84024B7E10304A1CD15C7" action="add">
+  <actual_result>Can connect to destination server.</actual_result>
+  <description>Connect Destination Server</description>
+  <expected_result>Can connect to destination server</expected_result>
+  <method_name keyed_name="T_DM_CanConnectDestinationServer" type="Method">750ABF0118864EAD9FAADFA0FB54A6BA</method_name>
+  <module_name>Data_Migration</module_name>
+  <priority>1</priority>
+  <test_result>Passed</test_result>
+  <test_result_color>#39FF14</test_result_color>
+  <test_steps>Check the following variables to connect destination server.
+NewServerURL
+NewServerDBName
+NewServerUserName
+NewServerPassword</test_steps>
+  <test_type>Automatic</test_type>
+  <name>DM-001</name>
+ </Item>
+</AML>

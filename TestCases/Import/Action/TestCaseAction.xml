@@ -1,0 +1,15 @@
+﻿<AML>
+ <Item type="Action" id="F3E90C56EB144D518C2DC771AA205DAE" action="add">
+  <item_query>&lt;Item type="{@type}" action="get"&gt;&lt;id&gt;&lt;xsl:value-of select="@id" /&gt;&lt;/id&gt;&lt;/Item&gt;</item_query>
+  <label xml:lang="en">Run Test</label>
+  <location>client</location>
+  <method keyed_name="TestCaseActionMethod" type="Method">
+   <Item type="Method" action="get" select="id">
+    <name>TestCaseActionMethod</name>
+   </Item>
+  </method>
+  <target>none</target>
+  <type>item</type>
+  <name>TestCaseAction</name>
+ </Item>
+</AML>

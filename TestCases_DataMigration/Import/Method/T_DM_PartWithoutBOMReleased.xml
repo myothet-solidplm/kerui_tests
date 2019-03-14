@@ -1,0 +1,341 @@
+﻿<AML>
+ <Item type="Method" id="F6EBED1D586340D5940CAC5D2AB6A3A4" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[            /* *****************************************************************************
+              Method Name:			T_DM_PartWithoutBOMReleased
+              Created By/Company:	MyoThet
+              Creation Date:		2019-03-12
+              Description:
+                 NewPartWithoutBOM is added 
+                 Vote : Ready for Review
+                 Vote : Ready for second review
+                 Vote : Release
+                 
+                 Expected Result : 
+                    ID of SingaporeWefic and ChinaKerui are equal
+                    
+
+              Revisions:
+                Rev Date		Modified By			Description
+                YYYY-MM-DD		***					Initial creation
+            ***************************************************************************** */
+
+            //WARNING: DO NOT FORGET TO DISABLE THIS IN A PRODUCTION ENVIRONMENT!!!
+            //if (System.Diagnostics.Debugger.Launch()) System.Diagnostics.Debugger.Break();
+
+            string MethodName = "T_DM_PartWithoutBOMReleased";
+
+            //***** GRANT IDENTITY PRIVILEGES
+            // GrantIdentityPrivileges("Super User"); // If this is enabled always revoke the privileges in the Finally below.
+            //*******************************
+            Innovator myInnovator = this.getInnovator();
+            Item result = this; // default return value.
+
+            try
+            {
+                string serverUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+                string dbName = myInnovator.getConnection().GetDatabaseName();
+
+                HttpServerConnection myConnection = IomFactory.CreateHttpServerConnection(serverUrl, dbName, WeficUsers.JACKSON_YAP, WeficUsers.PASSWORD);
+                Item login_result = myConnection.Login();
+                if (login_result.isError())
+                {
+                    throw new Exception("Login failed : " + WeficUsers.JACKSON_YAP + " : " + WeficUsers.PASSWORD);
+                }
+
+                Innovator JacksonYapInnovator = IomFactory.CreateInnovator(myConnection);
+
+                string itemNumber = GetNextPartSequence(JacksonYapInnovator);
+
+                Item newPartWithoutBOM = JacksonYapInnovator.newItem("Part", "add");
+                newPartWithoutBOM.setProperty("classification", PartInfo.OTHERS);
+                newPartWithoutBOM.setProperty("item_number", itemNumber);
+                newPartWithoutBOM.setProperty("name", itemNumber);
+                newPartWithoutBOM.setProperty("owned_by_id", GetIdentityIDFromLoginName(myInnovator, WeficUsers.JACKSON_YAP));
+                newPartWithoutBOM.setProperty("description", PartInfo.DESCRIPTION);
+                newPartWithoutBOM.setProperty("k_weight", PartInfo.K_WEIGHT);
+                newPartWithoutBOM.setProperty("k_classification", PartInfo.K_CLASSIFICATION);
+                newPartWithoutBOM.setProperty("k_product_group", PartInfo.K_PRODUCT_GROUP);
+                newPartWithoutBOM.setProperty("k_psl", PartInfo.K_PSL);
+                newPartWithoutBOM.setProperty("k_trim", PartInfo.K_TRIM);
+                newPartWithoutBOM.setProperty("k_temp", PartInfo.K_TEMP);
+                newPartWithoutBOM.setProperty("k_type", PartInfo.K_TYPE);
+                newPartWithoutBOM.setProperty("k_rev_code", PartInfo.K_REV_CODE);
+                newPartWithoutBOM = newPartWithoutBOM.apply();
+
+                if (newPartWithoutBOM.isError())
+                {
+                    throw new Exception(newPartWithoutBOM.getErrorString());
+                }
+
+                // NewPartWithoutBOM is added at the SingaporeWefic innovator
+
+                // Vote : Ready for Review
+                //ProgrammaticVoting(WeficUsers.JACKSON_YAP, WeficUsers.PASSWORD, newPartWithoutBOM, PartInfo.READY_FOR_REVIEW);
+                StringBuilder sb_params_voting = new StringBuilder();
+                sb_params_voting.Append("<userName>" + WeficUsers.JACKSON_YAP + "</userName>");
+                sb_params_voting.Append("<password>" + WeficUsers.PASSWORD + "</password>");
+                sb_params_voting.Append("<votePath>" + PartInfo.READY_FOR_REVIEW + "</votePath>");
+                sb_params_voting.Append("<itemID>" + newPartWithoutBOM.getID() + "</itemID>");
+                sb_params_voting.Append("<itemType>" + newPartWithoutBOM.getType() + "</itemType>");
+                string str_params_voting = sb_params_voting.ToString();
+
+                Item voteResult = JacksonYapInnovator.applyMethod("ProgrammaticVoting", str_params_voting);
+
+                if (voteResult.isError())
+                {
+                    throw new Exception(voteResult.getErrorString());
+                }
+
+                // Vote : Ready for second review
+                //ProgrammaticVoting(WeficUsers.KYAW_THET, WeficUsers.PASSWORD, newPartWithoutBOM, PartInfo.READY_FOR_SECOND_REVIEW);
+
+                myConnection = IomFactory.CreateHttpServerConnection(serverUrl, dbName, WeficUsers.KYAW_THET, WeficUsers.PASSWORD);
+                login_result = myConnection.Login();
+                if (login_result.isError())
+                {
+                    throw new Exception("Login failed : " + WeficUsers.KYAW_THET + " : " + WeficUsers.PASSWORD);
+                }
+
+                Innovator KyawThetInnovator = IomFactory.CreateInnovator(myConnection);
+
+                sb_params_voting = new StringBuilder();
+                sb_params_voting.Append("<userName>" + WeficUsers.KYAW_THET + "</userName>");
+                sb_params_voting.Append("<password>" + WeficUsers.PASSWORD + "</password>");
+                sb_params_voting.Append("<votePath>" + PartInfo.READY_FOR_SECOND_REVIEW + "</votePath>");
+                sb_params_voting.Append("<itemID>" + newPartWithoutBOM.getID() + "</itemID>");
+                sb_params_voting.Append("<itemType>" + newPartWithoutBOM.getType() + "</itemType>");
+                str_params_voting = sb_params_voting.ToString();
+
+                voteResult = KyawThetInnovator.applyMethod("ProgrammaticVoting", str_params_voting);
+
+                if (voteResult.isError())
+                {
+                    throw new Exception(voteResult.getErrorString());
+                }
+
+                // "Vote : Release
+                //ProgrammaticVoting(WeficUsers.ANDY_KER, WeficUsers.PASSWORD, newPartWithoutBOM, PartInfo.RELEASE);
+                myConnection = IomFactory.CreateHttpServerConnection(serverUrl, dbName, WeficUsers.ANDY_KER, WeficUsers.PASSWORD);
+                login_result = myConnection.Login();
+                if (login_result.isError())
+                {
+                    throw new Exception("Login failed : " + WeficUsers.ANDY_KER + " : " + WeficUsers.PASSWORD);
+                }
+
+                Innovator AndyKerInnovator = IomFactory.CreateInnovator(myConnection);
+
+                sb_params_voting = new StringBuilder();
+                sb_params_voting.Append("<userName>" + WeficUsers.ANDY_KER + "</userName>");
+                sb_params_voting.Append("<password>" + WeficUsers.PASSWORD + "</password>");
+                sb_params_voting.Append("<votePath>" + PartInfo.RELEASE + "</votePath>");
+                sb_params_voting.Append("<itemID>" + newPartWithoutBOM.getID() + "</itemID>");
+                sb_params_voting.Append("<itemType>" + newPartWithoutBOM.getType() + "</itemType>");
+                str_params_voting = sb_params_voting.ToString();
+
+                voteResult = AndyKerInnovator.applyMethod("ProgrammaticVoting", str_params_voting);
+
+                if (voteResult.isError())
+                {
+                    throw new Exception(voteResult.getErrorString());
+                }
+
+                // Get Item from SingaporeWefic innovator
+                Item SingaporeWeficItem = myInnovator.getItemByKeyedName("Part", itemNumber);
+
+                // Get Item from ChinaKerui innovator
+                serverUrl = myInnovator.getItemByKeyedName("Variable", "NewServerURL").getProperty("value", "");
+                dbName = myInnovator.getItemByKeyedName("Variable", "NewServerDBName").getProperty("value", "");
+                myConnection = IomFactory.CreateHttpServerConnection(serverUrl, dbName, KeruiUsers.CHINA_KERUI, KeruiUsers.CHINA_KERUI_PASSWORD);
+                login_result = myConnection.Login();
+                if (login_result.isError())
+                {
+                    throw new Exception("Login failed : " + KeruiUsers.CHINA_KERUI + " : " + KeruiUsers.CHINA_KERUI_PASSWORD);
+                }
+
+                Innovator chinaKeruiInnovator = IomFactory.CreateInnovator(myConnection);
+                Item ChinaKeruiItem = chinaKeruiInnovator.getItemByKeyedName("Part", itemNumber);
+
+                // Check ID of SingaporeWefic and ChinaKerui are equal
+                if (SingaporeWeficItem.getID() != ChinaKeruiItem.getID())
+                {
+                    throw new Exception("ID of SingaporeWefic and ChinaKerui are different");
+                }
+
+                result = myInnovator.newResult("ID of SingaporeWefic and ChinaKerui are equal");
+            }
+            catch (System.Exception ex)
+            {
+                result = myInnovator.newError(string.Format("SYSTEM EXCEPTION in method {0}\n{1}", MethodName, ex.Message));
+                result.setErrorCode("0"); //only use if this method is called from another method
+            }
+            finally
+            {
+                //**** REVOKE IDENTITY PRIVILEGES
+                // RevokeIdentityPrivileges();
+                //*******************************
+            }
+
+            return result;
+        }
+
+        public string GetNextPartSequence(Innovator myInnovator)
+        {
+            const string DefaultPartSequence = "Default Part";
+
+            Item sequence_item = myInnovator.newItem("Sequence", "get");
+            sequence_item.setProperty("name", DefaultPartSequence);
+            sequence_item = sequence_item.apply();
+
+            if (sequence_item.isError())
+            {
+                Item partSequence = myInnovator.newItem("Sequence", "add");
+                partSequence.setProperty("name", DefaultPartSequence);
+                partSequence.setProperty("prefix", "TEST_PART_");
+                partSequence.setProperty("initial_value", "0");
+                partSequence.setProperty("current_value", "0");
+                partSequence = partSequence.apply();
+            }
+
+            return myInnovator.getNextSequence(DefaultPartSequence);
+        }
+
+        public string GetIdentityIDFromLoginName(Innovator myInnovator, string loginName)
+        {
+            Item userItem = myInnovator.newItem("User", "get");
+            userItem.setAttribute("select", "id");
+            userItem.setProperty("login_name", loginName);
+            userItem = userItem.apply();
+
+            Item alias = myInnovator.newItem("Alias", "get");
+            alias.setAttribute("select", "related_id");
+            alias.setProperty("source_id", userItem.getID());
+            alias = alias.apply();
+
+            return alias.getProperty("related_id", "");
+        }
+
+        public class WeficUsers
+        {
+            public const string JACKSON_YAP = "JACKSON.YAP";
+            public const string KYAW_THET = "KYAW.THET";
+            public const string ANDY_KER = "ANDY.K";
+
+            public const string K_SEngineer = "649023A37550443F8987B84C92C7D74F";
+
+            public const string PASSWORD = "123";
+        }
+
+        public class KeruiUsers
+        {
+            public const string CHINA_KERUI = "china_kerui";
+            public const string CHINA_KERUI_PASSWORD = "chinakerui";
+        }
+
+        public class PartInfo
+        {
+            public const string READY_FOR_REVIEW = "Ready for Review";
+            public const string READY_FOR_SECOND_REVIEW = "Ready for Second Review";
+            public const string RELEASE = "Release";
+
+            public const string OTHERS = "OTHERS";
+            public const string DESCRIPTION = "SCREW, HEXAGON SOCKET HEAD CAP, ASME B18.3, 5/16\" - 18UNC - 2A X 3.500\" LG, ASTM A320-GR L7 ALLOY STEEL, ZINC PLATED YELLOW CHROMATE PER ASTM B633 CL-5.";
+            public const string K_WEIGHT = "0.09 LBS";
+            public const string K_CLASSIFICATION = "ACCEPTABLE";
+            public const string K_PRODUCT_GROUP = "ACCESSORIES - NON API";
+            public const string K_PSL = "NA";
+            public const string K_TRIM = "FF-NL";
+            public const string K_TEMP = "U+X (0 TO 350�F)";
+            public const string K_TYPE = "PURCHASED";
+            public const string K_REV_CODE = "INITIAL RELEASED";
+        }
+
+        public static Innovator GetDestinationInnovator(Innovator SourceInnovator)
+        {
+            HttpServerConnection myConnection;
+            Innovator myNewInnovator;
+            string newServerURL = "";
+            string newServerDBName = "";
+            string newServerUserName = "";
+            string newServerPassword = "";
+
+            Item urlVar = SourceInnovator.newItem("VARIABLE", "get");
+            urlVar.setProperty("name", "NewServerURL");
+            urlVar = urlVar.apply();
+            newServerURL = urlVar.getProperty("value");
+
+            Item dbVar = SourceInnovator.newItem("VARIABLE", "get");
+            dbVar.setProperty("name", "NewServerDBName");
+            dbVar = dbVar.apply();
+            newServerDBName = dbVar.getProperty("value");
+
+            Item userVar = SourceInnovator.newItem("VARIABLE", "get");
+            userVar.setProperty("name", "NewServerUserName");
+            userVar = userVar.apply();
+            newServerUserName = userVar.getProperty("value");
+
+            Item passVar = SourceInnovator.newItem("VARIABLE", "get");
+            passVar.setProperty("name", "NewServerPassword");
+            passVar = passVar.apply();
+            newServerPassword = passVar.getProperty("value");
+
+            /*End Get Data From Variable*/
+            string webURL = newServerURL;
+            string dbName = newServerDBName;
+            string userName = newServerUserName;
+            string passWord = newServerPassword;
+            myConnection = IomFactory.CreateHttpServerConnection(webURL, dbName, userName, passWord);
+            Item login_result = myConnection.Login();
+            if (login_result.isError())
+            {
+                throw (new Exception("login failed"));
+            }
+            myNewInnovator = IomFactory.CreateInnovator(myConnection);
+            return myNewInnovator;
+        }
+
+        /// <summary>
+        /// This section is to allow the current method to assume the privileges of a specific identity.
+        /// For instance calling: grantIdentityPrivileges("Aras PLM"); will allow this method all of the
+        /// rights of the Aras PLM identity.
+        /// The revokeIdentityPrivileges() method will removed the privileges added for this method. It
+        /// must be called from before the method exits. Most likely in the Finally of the main method code.
+        /// If different identity privileges must be granted a second time within the same method, first use
+        /// revokeIdentityPrivileges() to remove the first privileges before granting new ones.
+        /// </summary>
+
+        private string AssignedIdentity;
+
+        /// <summary>
+        /// If required, call this helper function to run this method as another Identity. 
+        /// Ensure that you call the revokeIdentityPrivileges helper function in the 
+        /// finally block to revoke the Identity privilege when this method completes.
+        /// </summary>
+        public void GrantIdentityPrivileges(string assignedIdent)
+        {
+            if (!string.IsNullOrEmpty(AssignedIdentity))
+            {
+                RevokeIdentityPrivileges();
+            }
+
+            Aras.Server.Security.Identity secIdentity = Aras.Server.Security.Identity.GetByName(assignedIdent);
+            if (Aras.Server.Security.Permissions.GrantIdentity(secIdentity))
+            {
+                AssignedIdentity = assignedIdent;
+            }
+        }
+
+        /// <summary>
+        /// If you granted security privileges, then you need to ensure that you revoke the privilege.
+        /// </summary>
+        public void RevokeIdentityPrivileges()
+        {
+            if (AssignedIdentity != null)
+            {
+                Aras.Server.Security.Permissions.RevokeIdentity(Aras.Server.Security.Identity.GetByName(AssignedIdentity));
+                AssignedIdentity = null;
+            }]]></method_code>
+  <method_type>C#</method_type>
+  <name>T_DM_PartWithoutBOMReleased</name>
+ </Item>
+</AML>

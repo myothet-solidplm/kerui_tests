@@ -1,0 +1,38 @@
+﻿<AML>
+ <Item type="List" id="F9232B1549AA44FC95A12467C068C847" action="add">
+  <description>1 indicates highest priority</description>
+  <name>TestCasePriority</name>
+  <Relationships>
+   <Item type="Value" id="877244F336914A08AF2236D8BCAC7B65" action="add">
+    <label xml:lang="en">1</label>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCasePriority" type="List">F9232B1549AA44FC95A12467C068C847</source_id>
+    <value>1</value>
+   </Item>
+   <Item type="Value" id="493267A0A7BD4BA5861C5DB1D39535AD" action="add">
+    <label xml:lang="en">2</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="TestCasePriority" type="List">F9232B1549AA44FC95A12467C068C847</source_id>
+    <value>2</value>
+   </Item>
+   <Item type="Value" id="B79AB02D30D644B09376F93FE6C1E5F9" action="add">
+    <label xml:lang="en">3</label>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="TestCasePriority" type="List">F9232B1549AA44FC95A12467C068C847</source_id>
+    <value>3</value>
+   </Item>
+   <Item type="Value" id="E7EBF3505DF5411796FEA848E74802C9" action="add">
+    <label xml:lang="en">4</label>
+    <sort_order>512</sort_order>
+    <source_id keyed_name="TestCasePriority" type="List">F9232B1549AA44FC95A12467C068C847</source_id>
+    <value>4</value>
+   </Item>
+   <Item type="Value" id="DBAE12DC7C31481CB95402555C89F839" action="add">
+    <label xml:lang="en">5</label>
+    <sort_order>640</sort_order>
+    <source_id keyed_name="TestCasePriority" type="List">F9232B1549AA44FC95A12467C068C847</source_id>
+    <value>5</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

@@ -1,0 +1,6 @@
+<imports>
+  <package name="TestCases" path="TestCases\Import" />
+  <package name="TestCases_DataMigration" path="TestCases_DataMigration\Import">
+    <dependson name="TestCases" />
+  </package>
+</imports>

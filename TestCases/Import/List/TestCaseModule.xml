@@ -1,0 +1,26 @@
+﻿<AML>
+ <Item type="List" id="EFBCDD7A19F347588978F43D10E1A196" action="add">
+  <description>Business Process</description>
+  <name>TestCaseModule</name>
+  <Relationships>
+   <Item type="Value" id="2CF4124DC6764AE7A16FBCA5E0E68761" action="add">
+    <label xml:lang="en">WEFIC_PLM</label>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCaseModule" type="List">EFBCDD7A19F347588978F43D10E1A196</source_id>
+    <value>WEFIC_PLM</value>
+   </Item>
+   <Item type="Value" id="0243F33DDF7247828E5050926826CDC7" action="add">
+    <label xml:lang="en">WEFIC_Accounting</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="TestCaseModule" type="List">EFBCDD7A19F347588978F43D10E1A196</source_id>
+    <value>WEFIC_Accounting</value>
+   </Item>
+   <Item type="Value" id="39CA553C28FC4680B26369C812051D0D" action="add">
+    <label xml:lang="en">Data_Migration</label>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="TestCaseModule" type="List">EFBCDD7A19F347588978F43D10E1A196</source_id>
+    <value>Data_Migration</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

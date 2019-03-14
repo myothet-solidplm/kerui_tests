@@ -1,0 +1,138 @@
+﻿<AML>
+ <Item type="Method" id="750ABF0118864EAD9FAADFA0FB54A6BA" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[            /* *****************************************************************************
+              Method Name:			T_DM_CanConnectDestinationServer
+              Created By/Company:	MyoThet
+              Creation Date:		2019-03-14
+              Description:
+                Get the values from the following variables and make connection to destination server
+                    NewServerURL
+                    NewServerDBName
+                    NewServerUserName
+                    NewServerPassword
+                 
+                 Expected Result : 
+                    Can connect to destination server
+                    
+
+              Revisions:
+                Rev Date		Modified By			Description
+                YYYY-MM-DD		***					Initial creation
+            ***************************************************************************** */
+
+            //WARNING: DO NOT FORGET TO DISABLE THIS IN A PRODUCTION ENVIRONMENT!!!
+            //if (System.Diagnostics.Debugger.Launch()) System.Diagnostics.Debugger.Break();
+
+            string MethodName = "T_DM_CanConnectDestinationServer";
+
+            //***** GRANT IDENTITY PRIVILEGES
+            // GrantIdentityPrivileges("Super User"); // If this is enabled always revoke the privileges in the Finally below.
+            //*******************************
+            Innovator myInnovator = this.getInnovator();
+            Item result = this; // default return value.
+
+            try
+            {
+
+                HttpServerConnection myConnection;
+                string newServerURL = "";
+                string newServerDBName = "";
+                string newServerUserName = "";
+                string newServerPassword = "";
+
+                Item urlVar = myInnovator.newItem("VARIABLE", "get");
+                urlVar.setProperty("name", "NewServerURL");
+                urlVar = urlVar.apply();
+                newServerURL = urlVar.getProperty("value");
+
+                Item dbVar = myInnovator.newItem("VARIABLE", "get");
+                dbVar.setProperty("name", "NewServerDBName");
+                dbVar = dbVar.apply();
+                newServerDBName = dbVar.getProperty("value");
+
+                Item userVar = myInnovator.newItem("VARIABLE", "get");
+                userVar.setProperty("name", "NewServerUserName");
+                userVar = userVar.apply();
+                newServerUserName = userVar.getProperty("value");
+
+                Item passVar = myInnovator.newItem("VARIABLE", "get");
+                passVar.setProperty("name", "NewServerPassword");
+                passVar = passVar.apply();
+                newServerPassword = passVar.getProperty("value");
+
+                /*End Get Data From Variable*/
+                string webURL = newServerURL;
+                string dbName = newServerDBName;
+                string userName = newServerUserName;
+                string passWord = newServerPassword;
+                myConnection = IomFactory.CreateHttpServerConnection(webURL, dbName, userName, passWord);
+                Item login_result = myConnection.Login();
+                if (login_result.isError())
+                {
+                    throw (new Exception("login failed"));
+                }
+
+                return myInnovator.newResult("Can connect to destination server.");
+
+            }
+            catch (System.Exception ex)
+            {
+                result = myInnovator.newError(string.Format("SYSTEM EXCEPTION in method {0}\n{1}", MethodName, ex.Message));
+                result.setErrorCode("0"); //only use if this method is called from another method
+            }
+            finally
+            {
+                //**** REVOKE IDENTITY PRIVILEGES
+                // RevokeIdentityPrivileges();
+                //*******************************
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This section is to allow the current method to assume the privileges of a specific identity.
+        /// For instance calling: grantIdentityPrivileges("Aras PLM"); will allow this method all of the
+        /// rights of the Aras PLM identity.
+        /// The revokeIdentityPrivileges() method will removed the privileges added for this method. It
+        /// must be called from before the method exits. Most likely in the Finally of the main method code.
+        /// If different identity privileges must be granted a second time within the same method, first use
+        /// revokeIdentityPrivileges() to remove the first privileges before granting new ones.
+        /// </summary>
+
+        private string AssignedIdentity;
+
+        /// <summary>
+        /// If required, call this helper function to run this method as another Identity. 
+        /// Ensure that you call the revokeIdentityPrivileges helper function in the 
+        /// finally block to revoke the Identity privilege when this method completes.
+        /// </summary>
+        public void GrantIdentityPrivileges(string assignedIdent)
+        {
+            if (!string.IsNullOrEmpty(AssignedIdentity))
+            {
+                RevokeIdentityPrivileges();
+            }
+
+            Aras.Server.Security.Identity secIdentity = Aras.Server.Security.Identity.GetByName(assignedIdent);
+            if (Aras.Server.Security.Permissions.GrantIdentity(secIdentity))
+            {
+                AssignedIdentity = assignedIdent;
+            }
+        }
+
+        /// <summary>
+        /// If you granted security privileges, then you need to ensure that you revoke the privilege.
+        /// </summary>
+        public void RevokeIdentityPrivileges()
+        {
+            if (AssignedIdentity != null)
+            {
+                Aras.Server.Security.Permissions.RevokeIdentity(Aras.Server.Security.Identity.GetByName(AssignedIdentity));
+                AssignedIdentity = null;
+            }]]></method_code>
+  <method_type>C#</method_type>
+  <name>T_DM_CanConnectDestinationServer</name>
+ </Item>
+</AML>

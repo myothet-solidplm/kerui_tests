@@ -1,0 +1,346 @@
+﻿<AML>
+ <Item type="ItemType" id="1D5C26611C9B4CA1B9D68E68899434FB" action="add">
+  <allow_private_permission>1</allow_private_permission>
+  <auto_search>1</auto_search>
+  <default_page_size>25</default_page_size>
+  <enforce_discovery>1</enforce_discovery>
+  <hide_where_used>0</hide_where_used>
+  <implementation_type>table</implementation_type>
+  <instance_data>TESTCASE</instance_data>
+  <is_dependent>0</is_dependent>
+  <is_relationship>0</is_relationship>
+  <is_versionable>0</is_versionable>
+  <label xml:lang="en">TestCase</label>
+  <label_plural xml:lang="en">TestCases</label_plural>
+  <large_icon>../Images/ContentStyle.svg</large_icon>
+  <open_icon>../Images/ContentStyle.svg</open_icon>
+  <revisions keyed_name="Default" type="Revision">7FE395DD8B9F4E1090756A34B733D75E</revisions>
+  <show_parameters_tab>1</show_parameters_tab>
+  <structure_view>tabs min</structure_view>
+  <unlock_on_logout>0</unlock_on_logout>
+  <use_src_access>0</use_src_access>
+  <name>TestCase</name>
+  <Relationships>
+   <Item type="Property" id="4A76B1AC69C34F67AD306DB09F845BD3" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>text</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Actual Result</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>70</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>actual_result</name>
+   </Item>
+   <Item type="Property" id="815710344A844F70BBA459CEBE371121" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>300</column_width>
+    <data_type>text</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Test Case Description</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>42</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>description</name>
+   </Item>
+   <Item type="Property" id="5A9641311DAF40228CEDE5751C1E8BA0" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>text</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Expected Result</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>60</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>expected_result</name>
+   </Item>
+   <Item type="Property" id="3ED89B320F674EA68FDE4041828C8EF9" action="add">
+    <column_alignment>left</column_alignment>
+    <data_source keyed_name="Method" type="ItemType" name="Method">87879A09B8044DE380D59DF22DE1867F</data_source>
+    <data_type>item</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <item_behavior>float</item_behavior>
+    <label xml:lang="en">Method</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>80</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>method_name</name>
+   </Item>
+   <Item type="Property" id="A51447A2FE5F4523B2BCDD6EC87D9850" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>150</column_width>
+    <data_source keyed_name="TestCaseModule">EFBCDD7A19F347588978F43D10E1A196</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Business Process</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>40</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>module_name</name>
+   </Item>
+   <Item type="Property" id="8C5558E9865F48A9A5A3DC6A59D2DA9E" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>150</column_width>
+    <data_type>string</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>1</is_required>
+    <keyed_name_order>1</keyed_name_order>
+    <label xml:lang="en">Test Case ID</label>
+    <order_by>1</order_by>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>41</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <stored_length>75</stored_length>
+    <track_history>0</track_history>
+    <name>name</name>
+   </Item>
+   <Item type="Property" id="C93944B0EA6043B09B175F5E4CCA513E" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>75</column_width>
+    <data_source keyed_name="TestCasePriority">F9232B1549AA44FC95A12467C068C847</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Priority</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>30</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>priority</name>
+   </Item>
+   <Item type="Property" id="65F4FFA20FC644DC9C7471735222ABC3" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>text</data_type>
+    <is_hidden>1</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Test Clean-up</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>75</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>test_cleanup</name>
+   </Item>
+   <Item type="Property" id="1969C506ACA641568C9163EAB4F47D2A" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>50</column_width>
+    <data_source keyed_name="TestResult">8F1528775FDD40A5B9094A2A2A44B13B</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Result</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>20</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>test_result</name>
+   </Item>
+   <Item type="Property" id="E1F9BE4AF0304C0BA96124A69B671D3C" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>50</column_width>
+    <data_type>color</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Result</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>10</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>test_result_color</name>
+   </Item>
+   <Item type="Property" id="FBCA79E785AC40CCAB7ACC658CA05B45" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>text</data_type>
+    <is_hidden>1</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Test Setup</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>45</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>test_setup</name>
+   </Item>
+   <Item type="Property" id="2E736A8926AA476E9467F6AAB0DA9F19" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>text</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Steps to Repeat</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>50</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>test_steps</name>
+   </Item>
+   <Item type="Property" id="F6709BD593CE4D5795C36D64A4A599DC" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>75</column_width>
+    <data_source keyed_name="TestType">2EBAB807B3A640009E32160D902D6EEB</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Test Type</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>43</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>test_type</name>
+   </Item>
+   <Item type="View" id="6DE97F943360488D9DEAE404DD64DDA4" action="add">
+    <client>js</client>
+    <related_id keyed_name="TestCase" type="Form">4407FED491E54CA2B2FD5701A880E291</related_id>
+    <role keyed_name="World" type="Identity">
+     <Item type="Identity" action="get" select="id">
+      <name>World</name>
+     </Item>
+    </role>
+    <show_ssvc>0</show_ssvc>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <type>default</type>
+   </Item>
+   <Item type="Item Action" id="EB3B985BD3F64AB68BEA3B4748DFE5FC" action="add">
+    <related_id keyed_name="TestCaseAction" type="Action">F3E90C56EB144D518C2DC771AA205DAE</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+   </Item>
+   <Item type="TOC Access" id="C2856CFE0F184321AE37A39C116A45FC" action="add">
+    <related_id keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <category>Administration</category>
+   </Item>
+   <Item type="Can Add" id="E180F35A0E654D2B857C52679961791F" action="add">
+    <can_add>1</can_add>
+    <class_path />
+    <related_id keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+   </Item>
+   <Item type="Allowed Permission" id="C521E8675DD34715AA10B6CC647CEAED" action="add">
+    <is_default>1</is_default>
+    <related_id keyed_name="TestCase" type="Permission">E9884D9D23814FE3A7A29955FDBCF821</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+ <Item type="ItemType" id="1D5C26611C9B4CA1B9D68E68899434FB" action="edit">
+  <Relationships>
+   <Item type="Property" action="edit" where="source_id='1D5C26611C9B4CA1B9D68E68899434FB' and name='modified_by_id'">
+    <column_alignment>left</column_alignment>
+    <data_source keyed_name="User" type="ItemType" name="User">45E899CD2859442982EB22BB2DF683E5</data_source>
+    <data_type>item</data_type>
+    <is_hidden>1</is_hidden>
+    <is_hidden2>1</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <item_behavior>float</item_behavior>
+    <label xml:lang="en">Executed By</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>1152</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>modified_by_id</name>
+   </Item>
+   <Item type="Property" action="edit" where="source_id='1D5C26611C9B4CA1B9D68E68899434FB' and name='modified_on'">
+    <column_alignment>left</column_alignment>
+    <column_width>80</column_width>
+    <data_type>date</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Date</label>
+    <pattern>short_date</pattern>
+    <range_inclusive>0</range_inclusive>
+    <readonly>1</readonly>
+    <sort_order>45</sort_order>
+    <source_id keyed_name="TestCase" type="ItemType" name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+    <track_history>0</track_history>
+    <name>modified_on</name>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

@@ -1,0 +1,19 @@
+﻿<AML>
+ <Item type="List" id="2EBAB807B3A640009E32160D902D6EEB" action="add">
+  <name>TestType</name>
+  <Relationships>
+   <Item type="Value" id="4A9BFF502A5645F290DCF219E5D80332" action="add">
+    <label xml:lang="en">Manual</label>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestType" type="List">2EBAB807B3A640009E32160D902D6EEB</source_id>
+    <value>Manual</value>
+   </Item>
+   <Item type="Value" id="2EEF500B90DC457FA608E74C35D2235D" action="add">
+    <label xml:lang="en">Automatic</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="TestType" type="List">2EBAB807B3A640009E32160D902D6EEB</source_id>
+    <value>Automatic</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

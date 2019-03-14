@@ -1,0 +1,19 @@
+﻿<AML>
+ <Item type="Permission" id="E9884D9D23814FE3A7A29955FDBCF821" action="add">
+  <is_private>0</is_private>
+  <name>TestCase</name>
+  <Relationships>
+   <Item type="Access" id="A6F6D175D071409C9F5CAA9B34DE05C8" action="add">
+    <can_change_access>1</can_change_access>
+    <can_delete>1</can_delete>
+    <can_discover>1</can_discover>
+    <can_get>1</can_get>
+    <can_update>1</can_update>
+    <related_id keyed_name="Administrators" type="Identity">2618D6F5A90949BAA7E920D1B04C7EE1</related_id>
+    <show_permissions_warning>1</show_permissions_warning>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="Permission">E9884D9D23814FE3A7A29955FDBCF821</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

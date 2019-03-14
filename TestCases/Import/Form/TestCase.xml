@@ -1,0 +1,346 @@
+﻿<AML>
+ <Item type="Form" id="4407FED491E54CA2B2FD5701A880E291" action="add">
+  <category_form>0</category_form>
+  <height>450</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>1280</width>
+  <name>TestCase</name>
+  <Relationships>
+   <Item type="Body" id="242990D1C9494FCF94B025ACD10B4CCE" action="add">
+    <bg_color>#FFFFFF</bg_color>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestCase" type="Form">4407FED491E54CA2B2FD5701A880E291</source_id>
+    <Relationships>
+     <Item type="Field" id="D5DAA75665934E5DAF48F6159485FFF1" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>textarea</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Actual Result</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="actual_result" type="Property">4A76B1AC69C34F67AD306DB09F845BD3</propertytype_id>
+      <sort_order>896</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>100</tab_index>
+      <tab_stop>1</tab_stop>
+      <textarea_cols>350</textarea_cols>
+      <textarea_rows>150</textarea_rows>
+      <x>950</x>
+      <y>250</y>
+      <name>actual_result</name>
+     </Item>
+     <Item type="Field" id="A27C4CEE08BD4A8E8890448EFD99E6C4" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>textarea</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Test Case Description</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="description" type="Property">815710344A844F70BBA459CEBE371121</propertytype_id>
+      <sort_order>1408</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>40</tab_index>
+      <tab_stop>1</tab_stop>
+      <textarea_cols>350</textarea_cols>
+      <textarea_rows>75</textarea_rows>
+      <x>200</x>
+      <y>50</y>
+      <name>description</name>
+     </Item>
+     <Item type="Field" id="5FCC00B3D0B444DF8EFC4988F48F3C3A" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>textarea</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Expected Result</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="expected_result" type="Property">5A9641311DAF40228CEDE5751C1E8BA0</propertytype_id>
+      <sort_order>768</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>90</tab_index>
+      <tab_stop>1</tab_stop>
+      <textarea_cols>350</textarea_cols>
+      <textarea_rows>150</textarea_rows>
+      <x>580</x>
+      <y>250</y>
+      <name>expected_result</name>
+     </Item>
+     <Item type="Field" id="D7692BFB4F314C3B86236FE12BD3A626" action="add">
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <html_code><![CDATA[<span id='ITEM_INFO_INTERNAL_SPAN'/>
+<script>
+  populate_ITEM_INFO_INTERNAL_SPAN = function()
+  {
+    document.getElementById('ITEM_INFO_INTERNAL_SPAN').innerHTML = aras.uiGetItemInfoTable(document.itemType);
+  }
+  window.addEventListener('load', populate_ITEM_INFO_INTERNAL_SPAN);
+</script>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>1152</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_stop>0</tab_stop>
+      <x>0</x>
+      <y>0</y>
+      <name>item_info</name>
+     </Item>
+     <Item type="Field" id="6216150E79044A82B81D34BCFF67AE97" action="add">
+      <border_width>0</border_width>
+      <display_length>250</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>item</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Method</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="method_name" type="Property">3ED89B320F674EA68FDE4041828C8EF9</propertytype_id>
+      <sort_order>1024</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>110</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>670</x>
+      <y>150</y>
+      <name>method_name</name>
+     </Item>
+     <Item type="Field" id="C3527AE65450471EA501CF2740029E5D" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>date</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Executed Date</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>1536</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>45</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>797</x>
+      <y>50</y>
+      <name>modified_on</name>
+     </Item>
+     <Item type="Field" id="7B883DE116604296986EA9ED0B2EDC6B" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>dropdown</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Business Process</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="module_name" type="Property">A51447A2FE5F4523B2BCDD6EC87D9850</propertytype_id>
+      <sort_order>1792</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>40</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>200</x>
+      <y>10</y>
+      <name>module_name</name>
+     </Item>
+     <Item type="Field" id="79CBADCD41284440BA18D190180FEB1B" action="add">
+      <border_width>0</border_width>
+      <display_length>150</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>text</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Test Case ID</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="name" type="Property">8C5558E9865F48A9A5A3DC6A59D2DA9E</propertytype_id>
+      <sort_order>1280</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>30</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>350</x>
+      <y>10</y>
+      <name>name</name>
+     </Item>
+     <Item type="Field" id="FD5ED86A7E4446B0AD82686A5F068139" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>dropdown</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Priority</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="priority" type="Property">C93944B0EA6043B09B175F5E4CCA513E</propertytype_id>
+      <sort_order>1920</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>30</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>520</x>
+      <y>10</y>
+      <name>priority</name>
+     </Item>
+     <Item type="Field" id="DEAB59B8C2CC47F0A6B36E477FEA9D44" action="add">
+      <border_width>0</border_width>
+      <display_length>75</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>dropdown</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Test Result</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="test_result" type="Property">1969C506ACA641568C9163EAB4F47D2A</propertytype_id>
+      <sort_order>384</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>50</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>580</x>
+      <y>50</y>
+      <name>test_result</name>
+     </Item>
+     <Item type="Field" id="3147B55AE3B848349F0A6D2E0A62F295" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>color</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="test_result_color" type="Property">E1F9BE4AF0304C0BA96124A69B671D3C</propertytype_id>
+      <sort_order>512</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>60</tab_index>
+      <tab_stop>0</tab_stop>
+      <x>665</x>
+      <y>64</y>
+      <name>test_result_color</name>
+     </Item>
+     <Item type="Field" id="672AE7AF4A4E4C238911505323545BAD" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>textarea</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Test Setup</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="test_setup" type="Property">FBCA79E785AC40CCAB7ACC658CA05B45</propertytype_id>
+      <sort_order>2048</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>3072</tab_index>
+      <tab_stop>1</tab_stop>
+      <textarea_cols>350</textarea_cols>
+      <textarea_rows>75</textarea_rows>
+      <x>200</x>
+      <y>150</y>
+      <name>test_setup</name>
+     </Item>
+     <Item type="Field" id="92227494AF1B4BDEAB23379B016E83A9" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>textarea</field_type>
+      <font_color>#000000</font_color>
+      <font_family>arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Steps to Repeat</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="test_steps" type="Property">2E736A8926AA476E9467F6AAB0DA9F19</propertytype_id>
+      <sort_order>640</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>80</tab_index>
+      <tab_stop>1</tab_stop>
+      <textarea_cols>350</textarea_cols>
+      <textarea_rows>300</textarea_rows>
+      <x>200</x>
+      <y>250</y>
+      <name>test_steps</name>
+     </Item>
+     <Item type="Field" id="EB3434C43E3E44CFA0165C726DC4D641" action="add">
+      <border_width>0</border_width>
+      <display_length>75</display_length>
+      <display_length_unit>px</display_length_unit>
+      <field_type>dropdown</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Test Type</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="test_type" type="Property">F6709BD593CE4D5795C36D64A4A599DC</propertytype_id>
+      <sort_order>1664</sort_order>
+      <source_id keyed_name="242990D1C9494FCF94B025ACD10B4CCE" type="Body">242990D1C9494FCF94B025ACD10B4CCE</source_id>
+      <tab_index>130</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>580</x>
+      <y>150</y>
+      <name>test_type</name>
+     </Item>
+    </Relationships>
+   </Item>
+  </Relationships>
+ </Item>
+ <Item type="Field" id="C3527AE65450471EA501CF2740029E5D" action="edit">
+  <!-- Please note: this AML depends on the "TestCase" ItemType. Please make sure it exists before running this. -->
+  <propertytype_id>
+   <Item type="Property" action="get" select="id">
+    <name>modified_on</name>
+    <source_id type="ItemType" keyed_name="TestCase">1D5C26611C9B4CA1B9D68E68899434FB</source_id>
+   </Item>
+  </propertytype_id>
+ </Item>
+</AML>

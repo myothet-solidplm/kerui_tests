@@ -1,0 +1,57 @@
+﻿<AML>
+ <Item type="Method" id="3D1E6D4806D04BF4A19F2672C5762FEE" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[/* *****************************************************************************
+Method Name:			TestCaseActionMethod
+Created By		:		MyoThet 
+Creation Date:			2018-09-24
+Description:
+	TestCase Action Method
+	
+Hooks:
+	Type:	Action : TestCaseAction
+	Event:	Method
+
+Revisions:
+	Rev Date		Modified By			Description
+	YYYY-MM-DD		$username$			Initial creation
+***************************************************************************** */
+
+// debugger;
+var myInnovator = new Innovator();
+
+var test_type = this.getProperty("test_type", "");
+if (test_type !== "Automatic") {
+    return myInnovator.newError("This TestCase is not Automatic Test! Please, test manually.");
+}
+
+var method_id = this.getProperty("method_name", "");
+if (method_id === "") {
+    return myInnovator.newError("Method Name is not configured yet.");
+}
+
+var method_item = myInnovator.getItemById("Method", method_id);
+var method_name = method_item.getProperty("name", "");
+var result = myInnovator.applyMethod(method_name, "");
+
+if (result.isError() === true) {
+    this.setAction("edit");
+    this.setProperty("test_result", "Failed");
+    this.setProperty("test_result_color", "#FA3E3E");
+    this.setProperty("actual_result", result.getErrorString());
+    var failed = this.apply();
+}
+
+if (result.isError() === false) {
+    this.setAction("edit");
+    this.setProperty("test_result", "Passed");
+    this.setProperty("test_result_color", "#39FF14");
+    this.setProperty("actual_result", result.getResult());
+    var passed = this.apply();
+}
+
+return this;]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>TestCaseActionMethod</name>
+ </Item>
+</AML>

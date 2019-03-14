@@ -1,0 +1,19 @@
+﻿<AML>
+ <Item type="List" id="8F1528775FDD40A5B9094A2A2A44B13B" action="add">
+  <name>TestResult</name>
+  <Relationships>
+   <Item type="Value" id="D1435A83064E4DAD989599E7934F98C5" action="add">
+    <label xml:lang="en">Passed</label>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="TestResult" type="List">8F1528775FDD40A5B9094A2A2A44B13B</source_id>
+    <value>Passed</value>
+   </Item>
+   <Item type="Value" id="9563620E359C416BA5B7EE0167653950" action="add">
+    <label xml:lang="en">Failed</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="TestResult" type="List">8F1528775FDD40A5B9094A2A2A44B13B</source_id>
+    <value>Failed</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

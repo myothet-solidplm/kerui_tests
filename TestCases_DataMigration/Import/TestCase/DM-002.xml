@@ -1,0 +1,21 @@
+﻿<AML>
+ <Item type="TestCase" id="D612EB3C64134F3B8F350821362E85E7" action="add">
+  <actual_result>ID of SingaporeWefic and ChinaKerui are equal</actual_result>
+  <description>NewPartWithoutBOMReleased</description>
+  <expected_result>ID of SingaporeWefic and ChinaKerui are equal</expected_result>
+  <method_name keyed_name="T_DM_PartWithoutBOMReleased" type="Method">F6EBED1D586340D5940CAC5D2AB6A3A4</method_name>
+  <module_name>Data_Migration</module_name>
+  <priority>2</priority>
+  <test_result>Passed</test_result>
+  <test_result_color>#39FF14</test_result_color>
+  <test_steps>Login with ANDY.K
+Create New Part 
+Vote : Ready for Review
+Vote : Ready for second review
+
+Login with KYAW.THET
+Vote : Release</test_steps>
+  <test_type>Automatic</test_type>
+  <name>DM-002</name>
+ </Item>
+</AML>
